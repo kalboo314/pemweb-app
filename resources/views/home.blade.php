@@ -10,6 +10,8 @@
 
 <body class="bg-white text-gray-800">
 
+    <x-navbar></x-navbar>
+
     <!-- Hero Section -->
     <div class="h-screen bg-[url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80')] bg-no-repeat bg-center bg-cover flex flex-col justify-center items-center px-4 text-center relative">
         <!-- Overlay -->
