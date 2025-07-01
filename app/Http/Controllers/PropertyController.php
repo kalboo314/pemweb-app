@@ -2,59 +2,68 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Property;
+use Exception;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
 {
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'tipe_bangunan' => 'required',
-            'luas_bangunan' => 'required|numeric',
-            'luas_tanah' => 'required|numeric',
-            'lokasi' => 'required',
-            'judul' => 'required',
-            'deskripsi' => 'required',
-            'harga' => 'required',
-            'sertifikat' => 'nullable|file|mimes:pdf,jpg,png|max:2048',
-            'fotos' => 'required|array',
-            'fotos.*' => 'image|mimes:jpeg,png,jpg|max:2048'
-        ]);
+        try {
+            $validated = $request->validate([
+                'tipe_bangunan' => 'required|string',
+                'luas_bangunan' => 'required|numeric',
+                'luas_tanah' => 'required|numeric',
+                'lokasi' => 'required|string',
+                'judul' => 'required|string',
+                'deskripsi' => 'nullable|string',
+                'harga' => 'required|string',
+                'sertifikat' => 'required|file|mimes:pdf,docx|max:2048',
+                'foto' => 'required|array',
+                'foto.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            ]);
 
-        // Proses upload sertifikat
-        $sertifikatPath = null;
-        if ($request->hasFile('sertifikat')) {
-            $sertifikatPath = $request->file('sertifikat')->store('sertifikat', 'public');
+            // simpan file sertifikat
+            $sertifikat = $request->file('sertifikat');
+            $sertifikatGenerated = $sertifikat->hashName();
+            $sertifikat->storeAs('uploads', $sertifikatGenerated);
+
+      
+            // simpan foto
+            foreach ($request->file('foto') as $foto) {
+                $fotoGenerated = $foto->hashName();
+                $foto->storeAs('uploads', $fotoGenerated);
+                // bisa simpan ke DB jika punya relasi ke tabel foto
+            }
+
+            // $foto = $request->file('foto');
+            // $fotoGenerated = $foto->hashName();
+            // $foto->storeAs('uploads', $fotoGenerated);
+
+            // hilangkan titik dari harga (contoh: 1.000.000 => 1000000)
+            $harga = str_replace('.', '', $request->input('harga'));
+
+            Property::create([
+                'tipe_bangunan' => $request->tipe_bangunan,
+                'luas_bangunan' => $request->luas_bangunan,
+                'luas_tanah' => $request->luas_tanah,
+                'lokasi' => $request->lokasi,
+                'judul' => $request->judul,
+                'deskripsi' => $request->deskripsi,
+                'harga' => $harga,
+
+                'sertifikat_original_name' => $sertifikat->getClientOriginalName(),
+                'sertifikat_generate_name' => $sertifikatGenerated,
+
+                'foto_original_name' => $foto->getClientOriginalName(),
+                'foto_generate_name' => $fotoGenerated,
+            ]);
+
+            return redirect('/')->with('success', 'Iklan berhasil dipasang!');
+        } catch (Exception $e) {
+            dd('Error:', $e->getMessage());
         }
-
-        // Proses upload foto-foto
-        $fotoPaths = [];
-        foreach ($request->file('fotos') as $foto) {
-            $filename = time() . '_' . $foto->getClientOriginalName();
-            
-            // Simpan foto original
-            $path = $foto->storeAs('rumah', $filename, 'public');
-            
-            // Buat thumbnail
-            $thumbnail = Image::make($foto->getRealPath())->resize(300, 200);
-            Storage::disk('public')->put('rumah/thumbs/' . $filename, $thumbnail->encode());
-            
-            $fotoPaths[] = $path;
-        }
-
-        // Simpan ke database
-        $rumah = Rumah::create([
-            'tipe_bangunan' => $request->tipe_bangunan,
-            'luas_bangunan' => $request->luas_bangunan,
-            'luas_tanah' => $request->luas_tanah,
-            'lokasi' => $request->lokasi,
-            'judul' => $request->judul,
-            'deskripsi' => $request->deskripsi,
-            'harga' => str_replace('.', '', $request->harga),
-            'sertifikat_path' => $sertifikatPath,
-            'foto_paths' => json_encode($fotoPaths),
-        ]);
-
-        return redirect()->back()->with('success', 'Iklan berhasil diposting!');
     }
 }
+

@@ -18,10 +18,17 @@ return new class extends Migration
             $table->integer('luas_tanah');
             $table->string('lokasi');
             $table->string('judul');
-            $table->text('deskripsi');
+            $table->text('deskripsi')->nullable();
             $table->decimal('harga', 15, 2);
-            $table->string('sertifikat_path')->nullable();
-            $table->json('foto_paths');
+
+            // Certificate file information
+            $table->string('sertifikat_original_name');
+            $table->string('sertifikat_generate_name')->unique();
+            
+            // Photo file information
+            $table->string('foto_original_name'); // Original photo filename
+            $table->string('foto_generate_name')->unique(); 
+
             $table->timestamps();
         });
     }

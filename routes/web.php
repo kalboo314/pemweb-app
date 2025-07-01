@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PropertyController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,3 +18,7 @@ Route::get('/profile', function () {
 Route::get('/advertise', function () {
     return view('advertise');
 });
+
+Route::post('/advertise', 
+    [PropertyController::class, 'store'
+])->name('property.store');
