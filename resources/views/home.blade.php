@@ -25,18 +25,28 @@
 
             <!-- Search Bar -->
             <div class="flex items-center bg-white rounded-full px-4 py-2 shadow-md w-full max-w-xl mx-auto">
-                <input type="text" placeholder="Enter Name, Keywords..." class="flex-grow outline-none px-4 py-2 text-gray-700">
-                <button class="text-white bg-yellow-400 hover:bg-yellow-500 rounded-full p-2">
-                    🔍
+                <input
+                    type="text"
+                    placeholder="Enter Name, Keywords..."
+                    class="flex-grow outline-none px-4 py-2 text-gray-700">
+                <button
+                    class="text-white bg-yellow-400 hover:bg-yellow-500 rounded-full p-3 transition duration-300 shadow hover:shadow-lg focus:outline-none">
+                    <!-- SVG Icon -->
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
+                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"></path>
+                    </svg>
                 </button>
             </div>
+
 
             <!-- Category Icons -->
             <div class="flex gap-4 mt-8 flex-wrap justify-center">
                 <!-- Card Item -->
                 <div class="flex items-center gap-3 px-5 py-2 rounded-full backdrop-blur-sm bg-white/30 shadow-lg text-white cursor-pointer hover:bg-white/40 transition">
                     <div class="bg-white p-2 rounded-full shadow-md">
-                       <img src="{{ asset('images/logos/modern_villa.png') }}" alt="Modern Villa" class="" />
+                        <img src="{{ asset('images/logos/modern_villa.png') }}" alt="Modern Villa" class="w-18 h-18" />
                     </div>
                     <span class="font-medium">Modern Villa</span>
                 </div>
@@ -44,7 +54,7 @@
                 <!-- Card Item -->
                 <div class="flex items-center gap-3 px-5 py-2 rounded-full backdrop-blur-sm bg-white/30 shadow-lg text-white cursor-pointer hover:bg-white/40 transition">
                     <div class="bg-white p-2 rounded-full shadow-md">
-                        <img src="{{ asset('images/logos/apartment.png') }}" alt="Apartment" class="" />
+                        <img src="{{ asset('images/logos/apartment.png') }}" alt="Apartment" class="w-18 h-18" />
                     </div>
                     <span class="font-medium">Apartment</span>
                 </div>
@@ -52,11 +62,12 @@
                 <!-- Card Item -->
                 <div class="flex items-center gap-3 px-5 py-2 rounded-full backdrop-blur-sm bg-white/30 shadow-lg text-white cursor-pointer hover:bg-white/40 transition">
                     <div class="bg-white p-2 rounded-full shadow-md">
-                        <img src="{{ asset('images/logos/town_house.png') }}" alt="Town House" class="" />
+                        <img src="{{ asset('images/logos/town_house.png') }}" alt="Town House" class="w-18 h-18" />
                     </div>
                     <span class="font-medium">Town House</span>
                 </div>
             </div>
+
 
 
         </div>
@@ -232,13 +243,13 @@
     </section>
 
     <!-- How It Works Section -->
-<section class="py-20 bg-white px-4 md:px-10">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
-        <!-- Satu Gambar Grid -->
-        <div class="relative w-full md:w-1/2 flex justify-center">
-            <img src="{{ asset('images/logos/howitworks.png') }}" alt="Property Grid" class="">
+    <section class="py-20 bg-white px-4 md:px-10">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
+            <!-- Satu Gambar Grid -->
+            <div class="relative w-full md:w-1/2 flex justify-center">
+                <img src="{{ asset('images/logos/howitworks.png') }}" alt="Property Grid" class="">
 
-        </div>
+            </div>
             <!-- Text -->
             <div class="w-full md:w-1/2 pl-45">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
@@ -371,7 +382,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- Main Property -->
                 <div class="relative col-span-2 rounded-2xl overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80" class="w-full h-full object-cover" alt="Property">
+                    <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80" class="w-full h-full object-cover" alt="Modern Villa">
                     <!-- Labels -->
                     <div class="absolute top-4 left-4 flex gap-2">
                         <span class="bg-green-700 text-xs text-white font-bold px-3 py-1 rounded-full">FOR SALE</span>
@@ -390,11 +401,18 @@
                     </div>
                 </div>
 
-                <!-- Side Column -->
-                <div class="flex flex-col gap-6">
-                    <!-- Top Side Image with Arrow -->
-                    <div class="relative rounded-2xl overflow-hidden">
+                <!-- Side Column (2-row grid) -->
+                <div class="grid grid-cols-2 grid-rows-2 gap-6">
+                    <!-- Top Side Image with Arrows -->
+                    <div class="relative col-span-2 rounded-2xl overflow-hidden">
                         <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80" class="w-full h-full object-cover" />
+                        <!-- Left Arrow -->
+                        <button class="absolute inset-y-1/2 left-4 bg-white/70 hover:bg-white text-black p-2 rounded-full shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M12.707 14.707a1 1 0 01-1.414 0L7.293 10l4-4a1 1 0 011.414 1.414L9.414 10l3.293 3.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                        <!-- Right Arrow -->
                         <button class="absolute inset-y-1/2 right-4 bg-white/70 hover:bg-white text-black p-2 rounded-full shadow-md">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
@@ -402,9 +420,9 @@
                         </button>
                     </div>
 
-                    <!-- Bottom Left Image with Play Icon -->
+                    <!-- Bottom Left Play Image -->
                     <div class="relative rounded-2xl overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80" class="w-full h-full object-cover" />
+                        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740" class="w-full h-full object-cover" />
                         <button class="absolute inset-0 m-auto w-10 h-10 bg-white/80 text-black rounded-full flex items-center justify-center hover:bg-white transition">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M8 5v14l11-7z" />
@@ -413,14 +431,14 @@
                     </div>
 
                     <!-- Bottom Right Info Card -->
-                    <div class="bg-yellow-400 text-black p-6 rounded-2xl flex flex-col justify-between h-full">
+                    <div class="bg-yellow-400 text-black p-6 rounded-2xl flex flex-col justify-between">
                         <div>
                             <h3 class="text-3xl font-bold">280+</h3>
                             <p class="text-sm mt-2 font-medium">Properties</p>
                             <p class="text-sm mt-1 text-black/70">Explore our wide variety of properties to find your dream home today</p>
                         </div>
                         <div class="mt-6">
-                            <button class="bg-black text-white w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition">
+                            <button class="bg-white text-black w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                 </svg>
@@ -429,37 +447,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- Popular Real Estate Markets Section -->
-    <section class="bg-white py-20 px-4 md:px-10 text-center">
-        <div class="max-w-5xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Popular Real Estate Markets</h2>
-            <p class="text-gray-500 text-sm md:text-base mb-8">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
-            <div class="flex flex-wrap justify-center gap-3">
-                @php
-                $markets = [
-                "The Villages, FL real estate",
-                "New York, Real estate",
-                "Madera, CA real estate",
-                "Fontana, CA real estate",
-                "Moreno Valley, CA real estate",
-                "Aurora, IL real estate",
-                "Perris, CA real estate",
-                "Minnesota Lake, MN real estate",
-                "Woodbridge, VA real estate"
-                ];
-                @endphp
-
-                @foreach ($markets as $market)
-                <span class="px-4 py-2 border border-black text-sm rounded-full hover:bg-black hover:text-white transition cursor-pointer">
-                    {{ $market }}
-                </span>
-                @endforeach
-            </div>
-        </div>
     </section>
 
 
