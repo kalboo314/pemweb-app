@@ -25,9 +25,7 @@ return new class extends Migration
             $table->string('sertifikat_original_name');
             $table->string('sertifikat_generate_name')->unique();
             
-            // Photo file information
-            $table->string('foto_original_name'); // Original photo filename
-            $table->string('foto_generate_name')->unique(); 
+
 
             $table->timestamps();
         });

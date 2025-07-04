@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Property;
+use App\Models\PropertyPhoto;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -20,8 +21,8 @@ class PropertyController extends Controller
                 'deskripsi' => 'nullable|string',
                 'harga' => 'required|string',
                 'sertifikat' => 'required|file|mimes:pdf,docx|max:2048',
-                'foto' => 'required|array',
-                'foto.*' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+                'foto' => 'required|array|max:5',
+                'foto.*' => 'image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
             // simpan file sertifikat
@@ -29,22 +30,12 @@ class PropertyController extends Controller
             $sertifikatGenerated = $sertifikat->hashName();
             $sertifikat->storeAs('uploads', $sertifikatGenerated);
 
-      
-            // simpan foto
-            foreach ($request->file('foto') as $foto) {
-                $fotoGenerated = $foto->hashName();
-                $foto->storeAs('uploads', $fotoGenerated);
-                // bisa simpan ke DB jika punya relasi ke tabel foto
-            }
 
-            // $foto = $request->file('foto');
-            // $fotoGenerated = $foto->hashName();
-            // $foto->storeAs('uploads', $fotoGenerated);
 
             // hilangkan titik dari harga (contoh: 1.000.000 => 1000000)
             $harga = str_replace('.', '', $request->input('harga'));
 
-            Property::create([
+            $property = Property::create([
                 'tipe_bangunan' => $request->tipe_bangunan,
                 'luas_bangunan' => $request->luas_bangunan,
                 'luas_tanah' => $request->luas_tanah,
@@ -52,15 +43,22 @@ class PropertyController extends Controller
                 'judul' => $request->judul,
                 'deskripsi' => $request->deskripsi,
                 'harga' => $harga,
-
                 'sertifikat_original_name' => $sertifikat->getClientOriginalName(),
                 'sertifikat_generate_name' => $sertifikatGenerated,
-
-                'foto_original_name' => $foto->getClientOriginalName(),
-                'foto_generate_name' => $fotoGenerated,
             ]);
 
-            return redirect('/')->with('success', 'Iklan berhasil dipasang!');
+            foreach ($request->file('foto') as $foto) {
+                $fotoGenerated = $foto->hashName();
+                $foto->storeAs('uploads', $fotoGenerated);
+
+                PropertyPhoto::create([
+                    'property_id' => $property->id,
+                    'original_name' => $foto->getClientOriginalName(),
+                    'generated_name' => $fotoGenerated,
+                ]);
+            }
+
+            return redirect('/profile')->with('success', 'Iklan berhasil dipasang!');
         } catch (Exception $e) {
             dd('Error:', $e->getMessage());
         }

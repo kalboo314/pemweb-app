@@ -31,3 +31,18 @@ import { Pagination } from 'swiper/modules';
 //     },
 // });
 
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.querySelector('.main-header');
+
+    if (!header) return;
+
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 10) {
+            
+            header.classList.add('shadow-md');
+        } else {
+            // Jika kembali ke atas, hapus kelas bayangan
+            header.classList.remove('shadow-md');
+        }
+    });
+});

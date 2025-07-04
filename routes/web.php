@@ -23,6 +23,14 @@ Route::get('/advertise', function () {
     return view('advertise');
 });
 
+Route::get('/listing', function () {
+    return view('listing');
+});
+
+Route::get('/detail', function () {
+    return view('detail');
+});
+
 Route::get('/login', function () {
     return view('login');
 });
@@ -39,6 +47,7 @@ Route::post('/login', function (Request $request) {
         'email' => 'Email atau password salah.',
     ])->onlyInput('email');
 })->name('login');
+
 
 Route::post('/logout', function (Request $request) {
     Auth::logout();
@@ -60,3 +69,9 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::post('/advertise', 
     [PropertyController::class, 'store'
 ])->name('property.store');
+
+
+Route::get('/detail/{id}', function ($id) {
+    $property = \App\Models\Property::with('photos')->findOrFail($id);
+    return view('detail', compact('property'));
+});

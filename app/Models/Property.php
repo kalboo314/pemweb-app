@@ -19,8 +19,12 @@ class Property extends Model
         'harga',
         'sertifikat_original_name',
         'sertifikat_generate_name',
-        'foto_original_name',
-        'foto_generate_name'
-
     ];
+
+    public function photos()
+    {
+        return $this->hasMany(PropertyPhoto::class);
+    }
+
 }
+

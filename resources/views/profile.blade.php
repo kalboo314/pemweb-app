@@ -11,9 +11,9 @@
   <x-navbar></x-navbar>
 
   <section class="pt-20 py-10">
-    <img src="images/profile.png" alt="Foto Profil" class="w-28 h-28 rounded-full mx-auto object-cover">
-    <h1 class="text-2xl font-semibold mt-4">Hallo, Supri</h1>
-    <p class="text-gray-500">Jamu.Enak@gmail.com</p>
+    <h1 class="text-2xl font-semibold mt-4">Hallo, {{ auth()->user()->name }}</h1>
+    <p class="text-gray-500">{{ auth()->user()->email }}</p>
+
 
     <div class="flex flex-col md:flex-row justify-center items-start gap-8 mt-10 px-4">
       
@@ -21,9 +21,9 @@
       <div class="border border-gray-200 rounded-xl p-6 w-full max-w-sm text-center">
         <img src="images/iklan.png" alt="Iklan Kosong" class="w-24 mx-auto mb-4">
         <p class="mb-4">Anda belum memasang iklan</p>
-        <button class="bg-black text-white px-5 py-2 rounded-full hover:bg-gray-800 transition">
+        <a href="/advertise" class="inline-block bg-black text-white px-5 py-2 rounded-full hover:bg-gray-800 transition">
           Pasang iklan
-        </button>
+        </a>
       </div>
 
       <!-- Box Tools -->

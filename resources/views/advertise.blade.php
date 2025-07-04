@@ -192,30 +192,53 @@
         const reader = new FileReader();
         reader.onload = function (e) {
           const container = input.parentElement;
-          container.innerHTML = `<img src="${e.target.result}" class="w-full h-full object-cover" alt="Preview"/>`;
+
+          // Hapus ikon kamera jika ada
+          const icon = container.querySelector("svg");
+          if (icon) icon.remove();
+
+          // Hapus gambar sebelumnya jika ada
+          const existingImg = container.querySelector("img");
+          if (existingImg) existingImg.remove();
+
+          // Tambahkan preview gambar
+          const img = document.createElement("img");
+          img.src = e.target.result;
+          img.className = "w-full h-full object-cover absolute top-0 left-0 z-0";
+
+          container.appendChild(img);
         };
         reader.readAsDataURL(file);
       }
 
+
      function addPhoto() {
-      const container = document.getElementById("foto-container");
-      const newSlot = document.createElement("div");
-      newSlot.className =
-        "relative w-32 h-32 border border-gray-300 rounded-xl overflow-hidden flex justify-center items-center bg-white";
-      newSlot.innerHTML = `
-        <input name="foto[]" type="file" accept="image/*" onchange="previewImage(this)" class="absolute w-full h-full opacity-0 cursor-pointer z-20"/>
-        <svg xmlns="http://www.w3.org/2000/svg"
-          class="w-10 h-10 text-gray-400 z-10 pointer-events-none"
-          viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-          <circle cx="8.5" cy="8.5" r="1.5" />
-          <path d="M21 15l-5-5L5 21" />
-        </svg>
-      `;
+        const container = document.getElementById("foto-container");
+        const existingPhotos = container.querySelectorAll('input[name="foto[]"]');
+
+        if (existingPhotos.length >= 5) {
+          alert("Maksimal 5 foto.");
+          return;
+        }
+
+        const newSlot = document.createElement("div");
+        newSlot.className =
+          "relative w-32 h-32 border border-gray-300 rounded-xl overflow-hidden flex justify-center items-center bg-white";
+        newSlot.innerHTML = `
+          <input name="foto[]" type="file" accept="image/*" onchange="previewImage(this)" class="absolute w-full h-full opacity-0 cursor-pointer z-20"/>
+          <svg xmlns="http://www.w3.org/2000/svg"
+            class="w-10 h-10 text-gray-400 z-10 pointer-events-none"
+            viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
+        `;
         const tombolTambah = document.getElementById("tombol-tambah");
         container.insertBefore(newSlot, tombolTambah);
       }
+
 
       function formatRupiah(input) {
         let angka = input.value.replace(/[^,\d]/g, "").toString();
