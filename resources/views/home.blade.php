@@ -5,6 +5,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home - Jual Beli Rumah</title>
+    <style>
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeUp {
+            animation: fadeUp 0.6s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+        }
+    </style>
+
     @vite('resources/css/app.css')
 </head>
 
@@ -124,59 +142,57 @@
             <button class="px-5 py-2 border border-gray-300 rounded-full text-sm font-medium hover:bg-gray-200">For Rent</button>
         </div>
 
-        <!-- Property Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto py-10">
-            @for ($i = 0; $i < 6; $i++)
-                @php
-                // Dummy data yang berbeda-beda
-                $properties=[
-                ['name'=> 'Luxury Family Home', 'location' => 'JAKARTA PUSAT', 'price' => 'RP6.500.000.000', 'status' => ['sale', 'featured'], 'bed' => 4, 'bath' => 1, 'area' => 400],
-                ['name' => 'Skyper Pool Apartment', 'location' => 'BEKASI', 'price' => 'RP5.000.000.000', 'status' => ['sale'], 'bed' => 4, 'bath' => 2, 'area' => 450],
-                ['name' => 'North Dillard Street', 'location' => 'JAKARTA UTARA', 'price' => 'RP4.000.000/month', 'status' => ['rent'], 'bed' => 4, 'bath' => 2, 'area' => 400],
-                ['name' => 'Penthouse', 'location' => 'BANDUNG', 'price' => 'RP4.000.000.000', 'status' => ['sale'], 'bed' => 4, 'bath' => 2, 'area' => 450],
-                ['name' => 'New Apartment Nice View', 'location' => 'JAKARTA SELATAN', 'price' => 'RP10.000.000/month', 'status' => ['rent', 'featured'], 'bed' => 4, 'bath' => 1, 'area' => 460],
-                ['name' => 'Diamond Manor Apartment', 'location' => 'JAKARTA UTARA', 'price' => 'RP7.000.000', 'status' => ['sale', 'featured'], 'bed' => 4, 'bath' => 2, 'area' => 500],
-                ];
-                $item = $properties[$i];
-                @endphp
+        @php
+        $properties = [
+        ['name'=> 'Luxury Family Home', 'location' => 'JAKARTA PUSAT', 'price' => 'RP6.500.000.000', 'status' => ['sale', 'featured'], 'bed' => 4, 'bath' => 2, 'area' => 400],
+        ['name' => 'Skyper Pool Apartment', 'location' => 'BEKASI', 'price' => 'RP5.000.000.000', 'status' => ['sale'], 'bed' => 3, 'bath' => 2, 'area' => 380],
+        ['name' => 'North Dillard Street', 'location' => 'JAKARTA UTARA', 'price' => 'RP4.000.000/month', 'status' => ['rent'], 'bed' => 2, 'bath' => 1, 'area' => 300],
+        ['name' => 'Penthouse', 'location' => 'BANDUNG', 'price' => 'RP4.000.000.000', 'status' => ['sale'], 'bed' => 5, 'bath' => 3, 'area' => 450],
+        ['name' => 'New Apartment Nice View', 'location' => 'JAKARTA SELATAN', 'price' => 'RP10.000.000/month', 'status' => ['rent', 'featured'], 'bed' => 2, 'bath' => 1, 'area' => 250],
+        ['name' => 'Diamond Manor Apartment', 'location' => 'JAKARTA UTARA', 'price' => 'RP7.000.000.000', 'status' => ['sale', 'featured'], 'bed' => 4, 'bath' => 2, 'area' => 500],
+        ];
+        @endphp
 
-                <!-- Property Card -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition duration-300">
-                    <!-- Image Section -->
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80" alt="Property" class="w-full h-56 object-cover">
-
-                        <!-- Badges -->
-                        <div class="absolute top-3 left-3 flex gap-2 flex-wrap">
-                            @if(in_array('sale', $item['status']))
-                            <span class="bg-green-600 text-white text-xs font-semibold px-2 py-1 rounded">For Sale</span>
-                            @endif
-                            @if(in_array('rent', $item['status']))
-                            <span class="bg-teal-600 text-white text-xs font-semibold px-2 py-1 rounded">For Rent</span>
-                            @endif
-                            @if(in_array('featured', $item['status']))
-                            <span class="bg-yellow-400 text-white text-xs font-semibold px-2 py-1 rounded">Featured</span>
-                            @endif
-                        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            @foreach ($properties as $item)
+            <div class="group property-card bg-white rounded-2xl border border-gray-200 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden opacity-0 animate-fadeUp">
+                <div class="relative overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80" alt="{{ $item['name'] }}" class="w-full h-56 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+                    <div class="absolute top-4 left-4 flex gap-2">
+                        @foreach($item['status'] as $tag)
+                        <span class="py-1.5 px-2.5 rounded-md text-white text-xs font-bold uppercase backdrop-blur-sm bg-slate-900/70">{{ strtoupper($tag) }}</span>
+                        @endforeach
                     </div>
-
-                    <!-- Content -->
-                    <div class="p-5">
-                        <h3 class="text-lg font-semibold mb-1">{{ $item['name'] }}</h3>
-                        <p class="text-sm text-gray-500 mb-3">📍 {{ $item['location'] }}</p>
-                        <p class="text-red-500 font-bold mb-4">{{ $item['price'] }}</p>
-
-                        <!-- Facilities -->
-                        <div class="flex justify-between text-sm text-gray-500">
-                            <span>🛏️ {{ $item['bed'] }}</span>
-                            <span>🛁 {{ $item['bath'] }}</span>
-                            <span>📐 {{ $item['area'] }} m²</span>
+                </div>
+                <div class="p-5">
+                    <h3 class="text-xl font-semibold text-slate-900 mb-1">{{ $item['name'] }}</h3>
+                    <p class="text-sm font-medium text-gray-400 uppercase tracking-wider mb-3">{{ $item['location'] }}</p>
+                    <p class="text-lg font-bold text-slate-900">{{ $item['price'] }}</p>
+                    <hr class="my-4 border-gray-200">
+                    <div class="flex items-center justify-start gap-6 text-slate-600">
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
+                            </svg>
+                            <span class="font-medium">{{ $item['bed'] }}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a5.25 5.25 0 0 1 6.775-5.025a5.25 5.25 0 0 1 4.45 6.11 5.25 5.25 0 0 1-2.91 4.154a5.25 5.25 0 0 1-5.315.082A5.25 5.25 0 0 1 8.25 12a5.25 5.25 0 0 1-1.04-2.875a5.25 5.25 0 0 1 4.79-4.375Z" />
+                            </svg>
+                            <span class="font-medium">{{ $item['bath'] }}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75v4.5m0-4.5h-4.5m4.5 0L15 9m5.25 11.25v-4.5m0 4.5h-4.5m4.5 0L15 15" />
+                            </svg>
+                            <span class="font-medium">{{ $item['area'] }}</span>
                         </div>
                     </div>
                 </div>
-                @endfor
+            </div>
+            @endforeach
         </div>
-
 
         <!-- See All Button -->
         <div class="text-center mt-12">
@@ -186,17 +202,19 @@
         </div>
     </section>
 
-    <!-- Cities Section with Swiper -->
-    <section class="bg-gray-50 py-20 px-4 md:px-10 text-center">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Find Properties in These Cities</h2>
-            <p class="text-gray-500 text-sm md:text-base mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
-            <div class="relative">
-                <div class="swiper citiesSwiper">
-                    <div class="swiper-wrapper">
-                        @php
-                        $cities = [
+
+
+    <section class="bg-gray-50 py-20 px-4 md:px-10 text-center">
+    <div class="max-w-7xl mx-auto">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Find Properties in These Cities</h2>
+        <p class="text-gray-500 text-sm md:text-base mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+
+        <div class="relative">
+            <div class="swiper citiesSwiper">
+                <div class="swiper-wrapper">
+                    @php
+                    $cities = [
                         ["name" => "JAKARTA", "properties" => 3, "image" => "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80"],
                         ["name" => "BANDUNG", "properties" => 2, "image" => "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80"],
                         ["name" => "BEKASI", "properties" => 2, "image" => "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80"],
@@ -204,43 +222,43 @@
                         ["name" => "YOGYAKARTA", "properties" => 2, "image" => "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80"],
                         ["name" => "BOGOR", "properties" => 1, "image" => "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80"],
                         ["name" => "TANGERANG", "properties" => 2, "image" => "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80"],
-                        ];
-                        @endphp
+                    ];
+                    @endphp
 
-                        @foreach ($cities as $city)
-                        <div class="swiper-slide px-3">
-                            <div class="rounded-lg overflow-hidden relative group transition-all duration-300">
-                                <img src="{{ $city['image'] }}" alt="{{ $city['name'] }}" class="h-60 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent flex flex-col justify-end p-4 text-left text-white">
-                                    <h3 class="font-bold text-base">{{ $city['name'] }}</h3>
-                                    <p class="text-sm opacity-90">{{ $city['properties'] }} Properties</p>
-                                </div>
+                    @foreach ($cities as $city)
+                    <div class="swiper-slide px-3">
+                        <div class="rounded-lg overflow-hidden relative group transition-all duration-300">
+                            <img src="{{ $city['image'] }}" alt="{{ $city['name'] }}" class="h-60 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent flex flex-col justify-end p-4 text-left text-white">
+                                <h3 class="font-bold text-base">{{ $city['name'] }}</h3>
+                                <p class="text-sm opacity-90">{{ $city['properties'] }} Properties</p>
                             </div>
                         </div>
-                        @endforeach
                     </div>
-
-                    <!-- Pagination -->
-                    <div class="swiper-pagination !bottom-0 mt-6 !relative"></div>
-
-                    <!-- Navigation Buttons -->
-                    <div class="absolute inset-y-1/2 -translate-y-1/2 w-full flex justify-between px-2 md:px-4 z-10">
-                        <button class="swiper-button-prev-custom bg-black/50 hover:bg-black/70 text-white p-3 rounded-full shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-                        <button class="swiper-button-next-custom bg-black/50 hover:bg-black/70 text-white p-3 rounded-full shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-                    </div>
-
+                    @endforeach
                 </div>
+
+                <!-- Pagination -->
+                <div class="swiper-pagination !bottom-0 mt-6 !relative"></div>
+
+                <!-- Navigation Buttons -->
+                <div class="absolute inset-y-1/2 -translate-y-1/2 w-full flex justify-between px-2 md:px-4 z-10">
+                    <button class="swiper-button-prev-custom bg-black/50 hover:bg-black/70 text-white p-3 rounded-full shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <button class="swiper-button-next-custom bg-black/50 hover:bg-black/70 text-white p-3 rounded-full shadow-md">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                </div>
+
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- How It Works Section -->
     <section class="py-20 bg-white px-4 md:px-10">
@@ -472,32 +490,29 @@
 
 @push('scripts')
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        new Swiper(".citiesSwiper", {
-            slidesPerView: 1,
-            spaceBetween: 20,
-            loop: true,
-            pagination: {
-                el: ".swiper-pagination",
-                clickable: true,
+    const swiper = new Swiper('.citiesSwiper', {
+        slidesPerView: 1.2,
+        spaceBetween: 16,
+        breakpoints: {
+            640: {
+                slidesPerView: 2,
             },
-            navigation: {
-                nextEl: ".swiper-button-next-custom",
-                prevEl: ".swiper-button-prev-custom",
+            768: {
+                slidesPerView: 3,
             },
-            breakpoints: {
-                640: {
-                    slidesPerView: 2,
-                },
-                768: {
-                    slidesPerView: 3,
-                },
-                1024: {
-                    slidesPerView: 4,
-                },
+            1024: {
+                slidesPerView: 4,
             },
-        });
-
+        },
+        loop: false,
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next-custom",
+            prevEl: ".swiper-button-prev-custom",
+        },
     });
 </script>
 @endpush
