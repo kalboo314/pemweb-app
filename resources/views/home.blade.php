@@ -38,8 +38,8 @@
         <!-- Content -->
         <div class="relative z-20">
             <p class="text-white mb-4 tracking-widest uppercase text-sm">Let us guide your home</p>
-            <h1 class="text-5xl md:text-6xl font-bold text-white mb-2">Lorem Ipsum</h1>
-            <p class="text-white text-lg md:text-xl mb-6">Cari properti untuk dijual dan disewa di Indonesia</p>
+            <h1 class="text-5xl md:text-6xl font-bold text-white mb-2">RUMAHIN</h1>
+            <p class="text-white text-lg md:text-xl mb-6">Temukan rumah impian anda</p>
 
             <!-- Search Bar -->
             <div class="flex items-center bg-white rounded-full px-4 py-2 shadow-md w-full max-w-xl mx-auto">
@@ -93,10 +93,7 @@
 
     <!-- Why You Should Work With Us Section -->
     <section class="py-20 bg-white text-center px-4">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Why You Should Work With Us</h2>
-        <p class="text-gray-600 max-w-2xl mx-auto mb-12">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </p>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 pb-20">Why You Should Work With Us</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
             <!-- Card 1 -->
@@ -104,16 +101,16 @@
                 <img src="{{ asset('images/logos/icon_4.png') }}" alt="" class="" />
                 <h3 class="text-xl font-semibold mb-2">Wide Range of Properties</h3>
                 <p class="text-gray-600 text-sm max-w-xs">
-                    We offer expert insight to help you select property from a wide range.
+                    Kami menyediakan panduan ahli untuk membantu Anda memilih properti dari berbagai pilihan yang tersedia.
                 </p>
             </div>
 
             <!-- Card 2 -->
             <div class="flex flex-col items-center">
                 <img src="{{ asset('images/logos/icon_5.png') }}" alt="" class="" />
-                <h3 class="text-xl font-semibold mb-2">Buy or Rent Homes</h3>
+                <h3 class="text-xl font-semibold mb-2">Buy Homes</h3>
                 <p class="text-gray-600 text-sm max-w-xs">
-                    We’ll assist you to find the best market price and buy quickly as well.
+                    Kami akan membantu Anda menemukan harga pasar terbaik dan membeli dengan cepat.
                 </p>
             </div>
 
@@ -122,7 +119,7 @@
                 <img src="{{ asset('images/logos/icon_6.png') }}" alt="" class="" />
                 <h3 class="text-xl font-semibold mb-2">Trusted by Thousands</h3>
                 <p class="text-gray-600 text-sm max-w-xs">
-                    We offer free consultations to get a loan for your new home.
+                    Kami menyediakan konsultasi gratis untuk membantu Anda mendapatkan pinjaman untuk rumah baru Anda.
                 </p>
             </div>
         </div>
@@ -132,15 +129,9 @@
     <section class="py-20 bg-gray-50 px-4">
         <div class="text-center mb-10">
             <h2 class="text-3xl md:text-4xl font-bold mb-2">Featured Properties</h2>
-            <p class="text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
         </div>
 
         <!-- Filter Buttons -->
-        <div class="flex justify-center gap-4 mb-10 flex-wrap">
-            <button class="px-5 py-2 border border-gray-300 rounded-full text-sm font-medium bg-black text-white">All Properties</button>
-            <button class="px-5 py-2 border border-gray-300 rounded-full text-sm font-medium hover:bg-gray-200">For Sale</button>
-            <button class="px-5 py-2 border border-gray-300 rounded-full text-sm font-medium hover:bg-gray-200">For Rent</button>
-        </div>
 
         @php
         $properties = [
@@ -275,7 +266,7 @@
                     <span class="text-gray-600">Find a perfect home</span>
                 </h2>
                 <p class="text-gray-500 mb-8 text-sm md:text-base">
-                    Penjelasan singkat atau elemen penting bagaimana fasilitas kami bekerja. Velit nunc egestas ut morbi. Lorem diam diam.
+                    Penjelasan singkat atau elemen penting bagaimana fasilitas kami bekerja.
                 </p>
 
                 <ul class="space-y-6">
@@ -295,8 +286,8 @@
                             alt="Realtor"
                             class="w-8 h-8" />
                         <div>
-                            <h3 class="font-semibold text-lg text-gray-700">Meet Realtor</h3>
-                            <p class="text-sm text-gray-500">Bertemu dengan agen properti terpercaya yang siap membantu.</p>
+                            <h3 class="font-semibold text-lg text-gray-700">Survey</h3>
+                            <p class="text-sm text-gray-500">Membuat jadwal dan melakukan survey rumah impian anda.</p>
                         </div>
                     </li>
                     <li class="flex gap-4">
@@ -314,163 +305,7 @@
         </div>
     </section>
 
-
-    <!-- Testimonials Section -->
-    <section class="bg-[#FFF9F7] py-20 px-4 md:px-10">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <!-- Left Side: Overview -->
-            <div>
-                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4">What our customers are saying us?</h2>
-                <p class="text-gray-500 text-sm md:text-base mb-6">
-                    Various versions have evolved over the years, sometimes by accident, sometimes on purpose injected humour and the like.
-                </p>
-                <div class="flex gap-10">
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-900">10m+</h3>
-                        <p class="text-sm text-gray-600">Happy People</p>
-                    </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-900">4.88</h3>
-                        <p class="text-sm text-gray-600 flex items-center gap-1">
-                            Overall rating
-                            <span class="text-yellow-400">★★★★★</span>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Side: Testimonial -->
-            <div class="relative">
-                <div class="bg-white rounded-xl p-6 shadow-md relative">
-                    <div class="flex items-center gap-4 mb-4">
-                        <img src="https://i.pravatar.cc/50?img=3" alt="Customer" class="w-12 h-12 rounded-full">
-                        <div>
-                            <h4 class="text-sm font-semibold text-gray-800">FAROZ</h4>
-                            <p class="text-xs text-gray-500">Designer</p>
-                        </div>
-                        <div class="ml-auto text-3xl text-gray-300">“</div>
-                    </div>
-                    <p class="text-gray-600 text-sm">
-                        Searches for multiplexes, property comparisons, and the loan estimator. Works great. Learn ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                </div>
-
-                <!-- Arrows -->
-                <div class="flex gap-4 mt-6">
-                    <button class="w-10 h-10 rounded-full border flex items-center justify-center hover:bg-gray-100">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button class="w-10 h-10 rounded-full border flex items-center justify-center hover:bg-gray-100">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Partner Logos Section -->
-    <section class="bg-[#FFF9F7] py-10 px-4 md:px-10 border-t">
-        <div class="max-w-7xl mx-auto text-center">
-            <p class="text-sm text-gray-500 mb-6">Thousands of world's leading companies trust Space</p>
-            <div class="flex flex-wrap justify-center gap-10 grayscale opacity-80">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" class="h-6">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/20/AMD_Logo.svg" alt="AMD" class="h-6">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/3/32/Cisco_logo_blue_2016.svg" alt="Cisco" class="h-6">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Dropcam_Logo.svg" alt="Dropcam" class="h-6">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Logitech_logo.svg" alt="Logitech" class="h-6">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Spotify_logo_with_text.svg" alt="Spotify" class="h-6">
-            </div>
-        </div>
-    </section>
-
-    <!-- Best Properties Section -->
-    <section class="bg-neutral-900 text-white py-20 px-4 md:px-10">
-        <div class="max-w-7xl mx-auto">
-            <!-- Heading -->
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold">Best Properties</h2>
-                <p class="text-gray-400 mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-            </div>
-
-            <!-- Grid Content -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Main Property -->
-                <div class="relative col-span-2 rounded-2xl overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80" class="w-full h-full object-cover" alt="Modern Villa">
-                    <!-- Labels -->
-                    <div class="absolute top-4 left-4 flex gap-2">
-                        <span class="bg-green-700 text-xs text-white font-bold px-3 py-1 rounded-full">FOR SALE</span>
-                        <span class="bg-yellow-400 text-xs font-bold px-3 py-1 rounded-full">FEATURED</span>
-                    </div>
-                    <!-- Info -->
-                    <div class="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/70 to-transparent p-4">
-                        <h3 class="text-white font-bold text-lg">Villa One Hyde Park</h3>
-                        <p class="text-sm text-gray-300 mb-2">📍 DENPASAR, BALI</p>
-                        <div class="flex gap-4 text-sm text-gray-200">
-                            <span>$120,000</span>
-                            <span>🛏️ 4</span>
-                            <span>🛁 2</span>
-                            <span>📐 350</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Side Column (2-row grid) -->
-                <div class="grid grid-cols-2 grid-rows-2 gap-6">
-                    <!-- Top Side Image with Arrows -->
-                    <div class="relative col-span-2 rounded-2xl overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80" class="w-full h-full object-cover" />
-                        <!-- Left Arrow -->
-                        <button class="absolute inset-y-1/2 left-4 bg-white/70 hover:bg-white text-black p-2 rounded-full shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M12.707 14.707a1 1 0 01-1.414 0L7.293 10l4-4a1 1 0 011.414 1.414L9.414 10l3.293 3.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                            </svg>
-                        </button>
-                        <!-- Right Arrow -->
-                        <button class="absolute inset-y-1/2 right-4 bg-white/70 hover:bg-white text-black p-2 rounded-full shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                            </svg>
-                        </button>
-                    </div>
-
-                    <!-- Bottom Left Play Image -->
-                    <div class="relative rounded-2xl overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740" class="w-full h-full object-cover" />
-                        <button class="absolute inset-0 m-auto w-10 h-10 bg-white/80 text-black rounded-full flex items-center justify-center hover:bg-white transition">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M8 5v14l11-7z" />
-                            </svg>
-                        </button>
-                    </div>
-
-                    <!-- Bottom Right Info Card -->
-                    <div class="bg-yellow-400 text-black p-6 rounded-2xl flex flex-col justify-between">
-                        <div>
-                            <h3 class="text-3xl font-bold">280+</h3>
-                            <p class="text-sm mt-2 font-medium">Properties</p>
-                            <p class="text-sm mt-1 text-black/70">Explore our wide variety of properties to find your dream home today</p>
-                        </div>
-                        <div class="mt-6">
-                            <button class="bg-white text-black w-10 h-10 rounded-full flex items-center justify-center hover:opacity-80 transition">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-    </section>
-
-
-
+    <x-footer></x-footer>
 </body>
 
 </html>

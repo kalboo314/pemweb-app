@@ -30,7 +30,9 @@
         <?php endif; ?>
 
 
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+        <form action="{{ route('survey.store') }}" method="POST">
+            @csrf
+            <input type="hidden" name="property_id" value="{{ $property->id }}">
             <div class="space-y-5">
                 <div>
                     <input 
@@ -75,6 +77,8 @@
             </div>
         </form>
     </div>
+
+    <input type="hidden" name="property_id" value="{{ $property->id }}">
 
 </body>
 </html>

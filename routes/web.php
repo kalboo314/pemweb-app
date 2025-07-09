@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\PropertyController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Http\Request;
+use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -34,6 +36,11 @@ Route::get('/detail', function () {
 Route::get('/login', function () {
     return view('login');
 });
+
+Route::get('/house-survey', function () {
+    return view('house-survey');
+});
+
 
 Route::post('/login', function (Request $request) {
     $credentials = $request->only('email', 'password');
@@ -71,7 +78,26 @@ Route::post('/advertise',
 ])->name('property.store');
 
 
+Route::get('/listing', [PropertyController::class, 'index']);
+
+Route::get('/detail/{id}', [PropertyController::class, 'show']);
+
+
 Route::get('/detail/{id}', function ($id) {
     $property = \App\Models\Property::with('photos')->findOrFail($id);
     return view('detail', compact('property'));
-});
+})->name('detail');
+
+
+Route::get('/house-survey/{id}', function ($id) {
+    $property = \App\Models\Property::findOrFail($id);
+    return view('house-survey', compact('property'));
+})->name('survey');
+
+Route::get('/house-survey/{id}', [SurveyController::class, 'create'])->name('survey.create');
+
+Route::post('/house-survey', [SurveyController::class, 'store'])->name('survey.store');
+
+Route::get('/contact', [ContactController::class, 'show'])->name('contact');
+
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');

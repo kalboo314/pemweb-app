@@ -62,6 +62,14 @@ class PropertyController extends Controller
         } catch (Exception $e) {
             dd('Error:', $e->getMessage());
         }
+        
     }
+
+    public function index()
+    {
+        $properties = Property::latest()->paginate(9);
+        return view('listing', compact('properties'));
+    }
+
 }
 

@@ -10,7 +10,6 @@
   <body class="bg-gray-200 p-10">
     
     <x-navbar></x-navbar>
-    <div class="h-20"></div>
     <div class="max-w-screen-xl mx-auto bg-white p-10 rounded-lg shadow-lg">
       <form action="{{ route('property.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -27,7 +26,6 @@
                 <option>Pent House</option>
                 <option>Apartment</option>
                 <option>Town House</option>
-                <option>Lorem Ipsum</option>
               </select>
             </div>
 
