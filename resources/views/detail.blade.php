@@ -36,7 +36,7 @@
             {{-- Galeri Slider --}}
             <div class="relative rounded-2xl overflow-hidden shadow-lg">
                 @foreach($property->photos as $index => $photo)
-                    <img src="{{ asset('storage/uploads/' . $photo->foto_generate_name) }}"
+                    <img src="{{ asset('storage/uploads/' . $photo->generated_name) }}"
                         class="slide {{ $index === 0 ? 'active' : '' }} w-full h-[400px] object-cover rounded-2xl transition duration-300"
                         alt="Foto Properti {{ $index + 1 }}">
                 @endforeach

@@ -44,7 +44,15 @@
             @forelse($properties as $property)
                 <a href="{{ url('detail/' . $property->id) }}" class="group property-card bg-white rounded-2xl border border-gray-200 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden opacity-0 animate-fadeUp block"> <!-- Tambahkan class 'block' di sini -->
                     <div class="relative overflow-hidden">
-                        <img src="{{ asset('storage/' . $property->image) }}" alt="{{ $property->title }}" class="w-full h-56 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+                        @php
+                            $firstPhoto = $property->photos->first();
+                        @endphp
+
+                        @if($firstPhoto)
+                            <img src="{{ asset('storage/uploads/' . $firstPhoto->generated_name) }}" alt="{{ $firstPhoto->original_name }}" class="w-full h-56 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+                        @else
+                            <div class="w-full h-56 bg-gray-200 flex items-center justify-center text-gray-500">No Image</div>
+                        @endif
                         <div class="absolute top-4 left-4 flex gap-2">
                             <span class="py-1.5 px-2.5 rounded-md text-white text-xs font-bold uppercase backdrop-blur-sm {{ $property->status == 'FOR RENT' ? 'bg-emerald-600/90' : 'bg-slate-900/70' }}">{{ $property->status }}</span>
                             <span class="py-1.5 px-2.5 rounded-md text-white text-xs font-bold uppercase backdrop-blur-sm bg-slate-900/70">FEATURED</span>
@@ -65,7 +73,7 @@
                             </div>
                         </div>
                     </div>
-                </a> <!-- Tutup tag a di sini -->
+                </a>
             @empty
                 <p class="text-center col-span-3 text-gray-500">Tidak ada properti tersedia.</p>
             @endforelse
