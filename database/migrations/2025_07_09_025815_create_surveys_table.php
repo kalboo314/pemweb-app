@@ -16,9 +16,12 @@ return new class extends Migration
             $table->foreignId('property_id')->constrained('properties')->onDelete('cascade');
             $table->string('nama');
             $table->string('alamat');
+            $table->string('phone'); // baru
+            $table->date('tanggal'); // baru
             $table->text('catatan')->nullable();
             $table->timestamps();
         });
+
     }
 
 

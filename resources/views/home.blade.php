@@ -61,29 +61,32 @@
 
             <!-- Category Icons -->
             <div class="flex gap-4 mt-8 flex-wrap justify-center">
-                <!-- Card Item -->
-                <div class="flex items-center gap-3 px-5 py-2 rounded-full backdrop-blur-sm bg-white/30 shadow-lg text-white cursor-pointer hover:bg-white/40 transition">
+                <!-- Modern Villa (anggap ini Penthouse) -->
+                <a href="{{ url('/listing?tipe_bangunan=Town House') }}"
+                class="flex items-center gap-3 px-5 py-2 rounded-full backdrop-blur-sm bg-white/30 shadow-lg text-white cursor-pointer hover:bg-white/40 transition">
                     <div class="bg-white p-2 rounded-full shadow-md">
                         <img src="{{ asset('images/logos/modern_villa.png') }}" alt="Modern Villa" class="w-18 h-18" />
                     </div>
-                    <span class="font-medium">Modern Villa</span>
-                </div>
+                    <span class="font-medium">Town House</span>
+                </a>
 
-                <!-- Card Item -->
-                <div class="flex items-center gap-3 px-5 py-2 rounded-full backdrop-blur-sm bg-white/30 shadow-lg text-white cursor-pointer hover:bg-white/40 transition">
+                <!-- Apartment -->
+                <a href="{{ url('/listing?tipe_bangunan=Apartment') }}"
+                class="flex items-center gap-3 px-5 py-2 rounded-full backdrop-blur-sm bg-white/30 shadow-lg text-white cursor-pointer hover:bg-white/40 transition">
                     <div class="bg-white p-2 rounded-full shadow-md">
                         <img src="{{ asset('images/logos/apartment.png') }}" alt="Apartment" class="w-18 h-18" />
                     </div>
                     <span class="font-medium">Apartment</span>
-                </div>
+                </a>
 
-                <!-- Card Item -->
-                <div class="flex items-center gap-3 px-5 py-2 rounded-full backdrop-blur-sm bg-white/30 shadow-lg text-white cursor-pointer hover:bg-white/40 transition">
+                <!-- Town House -->
+                <a href="{{ url('/listing?tipe_bangunan=Pent House') }}"
+                class="flex items-center gap-3 px-5 py-2 rounded-full backdrop-blur-sm bg-white/30 shadow-lg text-white cursor-pointer hover:bg-white/40 transition">
                     <div class="bg-white p-2 rounded-full shadow-md">
                         <img src="{{ asset('images/logos/town_house.png') }}" alt="Town House" class="w-18 h-18" />
                     </div>
-                    <span class="font-medium">Town House</span>
-                </div>
+                    <span class="font-medium">Pent House</span>
+                </a>
             </div>
 
 
@@ -131,65 +134,59 @@
             <h2 class="text-3xl md:text-4xl font-bold mb-2">Featured Properties</h2>
         </div>
 
-        <!-- Filter Buttons -->
-
-        @php
-        $properties = [
-        ['name'=> 'Luxury Family Home', 'location' => 'JAKARTA PUSAT', 'price' => 'RP6.500.000.000', 'status' => ['sale', 'featured'], 'bed' => 4, 'bath' => 2, 'area' => 400],
-        ['name' => 'Skyper Pool Apartment', 'location' => 'BEKASI', 'price' => 'RP5.000.000.000', 'status' => ['sale'], 'bed' => 3, 'bath' => 2, 'area' => 380],
-        ['name' => 'North Dillard Street', 'location' => 'JAKARTA UTARA', 'price' => 'RP4.000.000/month', 'status' => ['rent'], 'bed' => 2, 'bath' => 1, 'area' => 300],
-        ['name' => 'Penthouse', 'location' => 'BANDUNG', 'price' => 'RP4.000.000.000', 'status' => ['sale'], 'bed' => 5, 'bath' => 3, 'area' => 450],
-        ['name' => 'New Apartment Nice View', 'location' => 'JAKARTA SELATAN', 'price' => 'RP10.000.000/month', 'status' => ['rent', 'featured'], 'bed' => 2, 'bath' => 1, 'area' => 250],
-        ['name' => 'Diamond Manor Apartment', 'location' => 'JAKARTA UTARA', 'price' => 'RP7.000.000.000', 'status' => ['sale', 'featured'], 'bed' => 4, 'bath' => 2, 'area' => 500],
-        ];
-        @endphp
-
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            @foreach ($properties as $item)
-            <div class="group property-card bg-white rounded-2xl border border-gray-200 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden opacity-0 animate-fadeUp">
+            @forelse($properties as $property)
+            <a href="{{ url('detail/' . $property->id) }}" class="group property-card bg-white rounded-2xl border border-gray-200 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl overflow-hidden opacity-0 animate-fadeUp block">
                 <div class="relative overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80" alt="{{ $item['name'] }}" class="w-full h-56 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+                    @php
+                        $firstPhoto = $property->photos->first();
+                    @endphp
+
+                    @if($firstPhoto)
+                        <img src="{{ asset('storage/uploads/' . $firstPhoto->generated_name) }}"
+                            alt="{{ $firstPhoto->original_name }}"
+                            class="w-full h-56 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105">
+                    @else
+                        <div class="w-full h-56 bg-gray-200 flex items-center justify-center text-gray-500">No Image</div>
+                    @endif
+
                     <div class="absolute top-4 left-4 flex gap-2">
-                        @foreach($item['status'] as $tag)
-                        <span class="py-1.5 px-2.5 rounded-md text-white text-xs font-bold uppercase backdrop-blur-sm bg-slate-900/70">{{ strtoupper($tag) }}</span>
-                        @endforeach
+                        <span class="py-1.5 px-2.5 rounded-md text-white text-xs font-bold uppercase backdrop-blur-sm bg-slate-900/70">Featured</span>
+                        <span class="py-1.5 px-2.5 rounded-md text-white text-xs font-bold uppercase backdrop-blur-sm bg-slate-900/70">Sale</span>
                     </div>
                 </div>
+
                 <div class="p-5">
-                    <h3 class="text-xl font-semibold text-slate-900 mb-1">{{ $item['name'] }}</h3>
-                    <p class="text-sm font-medium text-gray-400 uppercase tracking-wider mb-3">{{ $item['location'] }}</p>
-                    <p class="text-lg font-bold text-slate-900">{{ $item['price'] }}</p>
+                    <h3 class="text-xl font-semibold text-slate-900 mb-1">{{ $property->judul }}</h3>
+                    <p class="text-sm font-medium text-gray-400 uppercase tracking-wider mb-3">{{ strtoupper($property->lokasi) }}</p>
+                    <p class="text-lg font-bold text-slate-900">Rp{{ number_format($property->harga, 0, ',', '.') }}</p>
                     <hr class="my-4 border-gray-200">
-                    <div class="flex items-center justify-start gap-6 text-slate-600">
+
+                    <div class="flex items-center justify-start gap-6 text-slate-600 text-sm">
                         <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 0 1-2.247 2.118H6.622a2.25 2.25 0 0 1-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125Z" />
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l9-9 9 9M4.5 10.5V21h15V10.5" />
                             </svg>
-                            <span class="font-medium">{{ $item['bed'] }}</span>
+                            <span>{{ $property->luas_bangunan }} m²</span>
                         </div>
                         <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a5.25 5.25 0 0 1 6.775-5.025a5.25 5.25 0 0 1 4.45 6.11 5.25 5.25 0 0 1-2.91 4.154a5.25 5.25 0 0 1-5.315.082A5.25 5.25 0 0 1 8.25 12a5.25 5.25 0 0 1-1.04-2.875a5.25 5.25 0 0 1 4.79-4.375Z" />
+                            <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                                <path d="M3.75 3.75h4.5m-4.5 0L9 9m0 6l-5.25 5.25m0 0h4.5m-4.5 0L9 15m6-6l5.25-5.25m0 0h-4.5m4.5 0L15 9m0 6l5.25 5.25m0 0h-4.5m4.5 0L15 15"/>
                             </svg>
-                            <span class="font-medium">{{ $item['bath'] }}</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <svg class="w-5 h-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75v4.5m0-4.5h-4.5m4.5 0L15 9m5.25 11.25v-4.5m0 4.5h-4.5m4.5 0L15 15" />
-                            </svg>
-                            <span class="font-medium">{{ $item['area'] }}</span>
+                            <span>{{ $property->luas_tanah }} m²</span>
                         </div>
                     </div>
                 </div>
-            </div>
-            @endforeach
+            </a>
+            @empty
+                <p class="text-center col-span-3 text-gray-500">Tidak ada properti tersedia.</p>
+            @endforelse
         </div>
 
-        <!-- See All Button -->
         <div class="text-center mt-12">
-            <button class="bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-3 rounded-full font-medium shadow">
+            <a href="{{ url('/listing') }}" class="bg-yellow-400 hover:bg-yellow-500 text-white px-6 py-3 rounded-full font-medium shadow">
                 See All Listing →
-            </button>
+            </a>
         </div>
     </section>
 

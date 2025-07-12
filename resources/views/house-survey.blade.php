@@ -13,21 +13,16 @@
         <a href="#" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold">&times;</a>
 
         <h1 class="text-3xl font-bold text-center mb-6">House Survey</h1>
-
-        <?php
-        // Jika ada pesan sukses, tampilkan di sini
-        if (!empty($success_message)) :
-        ?>
-            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-6" role="alert">
-                <strong class="font-bold">Sukses!</strong>
-                <span class="block sm:inline"><?php echo $success_message; ?></span>
-                <div class="mt-4 text-sm">
-                    <p><strong>Nama:</strong> <?php echo $submitted_data['Nama']; ?></p>
-                    <p><strong>Alamat:</strong> <?php echo $submitted_data['Alamat']; ?></p>
-                    <p><strong>Catatan:</strong> <?php echo $submitted_data['Catatan']; ?></p>
-                </div>
+        
+        @if ($errors->any())
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+                <ul class="list-disc list-inside text-left">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
             </div>
-        <?php endif; ?>
+        @endif
 
 
         <form action="{{ route('survey.store') }}" method="POST">
@@ -50,7 +45,28 @@
                         type="text" 
                         id="alamat" 
                         name="alamat"
-                        placeholder="Alamat / Email"
+                        placeholder="Alamat Email"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                    >
+                </div>
+
+                <div>
+                    <input 
+                        type="text" 
+                        id="phone" 
+                        name="phone" 
+                        placeholder="Nomor Telepon"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        required
+                    >
+                </div>
+
+                <div>
+                    <input 
+                        type="date" 
+                        id="tanggal" 
+                        name="tanggal" 
                         class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                         required
                     >

@@ -7,6 +7,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Property;
+use App\Http\Controllers\ProfileController;
 
 
 Route::get('/', function () {
@@ -15,10 +17,6 @@ Route::get('/', function () {
 
 Route::get('/contact', function () {
     return view('contact');
-});
-
-Route::get('/profile', function () {
-    return view('profile');
 });
 
 Route::get('/advertise', function () {
@@ -42,6 +40,7 @@ Route::get('/house-survey', function () {
 });
 
 
+
 Route::post('/login', function (Request $request) {
     $credentials = $request->only('email', 'password');
 
@@ -63,22 +62,53 @@ Route::post('/logout', function (Request $request) {
     return redirect('/');
 })->name('logout');
 
+Route::get('/', function () {
+    $properties = Property::with('photos')->latest()->take(6)->get(); // ambil 6 properti terbaru
+    return view('home', compact('properties'));
+});
+
 Route::get('/profile', function () {
-    return view('profile');
+    $user = Auth::user();
+    $properties = $user->properties()->with('photos')->get();
+    return view('profile', compact('user', 'properties'));
 })->middleware('auth')->name('profile');
 
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+});
 
 Route::get('/register', [RegisterController::class, 'showRegisterForm'])->name('register');
 
 Route::post('/register', [RegisterController::class, 'register']);
 
+Route::post('/advertise', [PropertyController::class, 'store'])
+    ->middleware('auth')
+    ->name('property.store');
 
-Route::post('/advertise', 
-    [PropertyController::class, 'store'
-])->name('property.store');
 
 
-Route::get('/listing', [PropertyController::class, 'index']);
+Route::get('/listing', function () {
+    $properties = \App\Models\Property::with('photos')
+        ->when(request('lokasi'), fn($q) => $q->where('lokasi', request('lokasi')))
+        ->when(request('tipe_bangunan'), fn($q) => $q->where('tipe_bangunan', request('tipe_bangunan')))
+        ->when(request('harga'), function ($q) {
+            $range = request('harga');
+            if ($range === '<500') {
+                $q->where('harga', '<', 500000000);
+            } elseif ($range === '500-1000') {
+                $q->whereBetween('harga', [500000000, 1000000000]);
+            } elseif ($range === '>1000') {
+                $q->where('harga', '>', 1000000000);
+            }
+        })
+        ->latest()
+        ->paginate(9);
+
+    return view('listing', compact('properties'));
+});
+
 
 Route::get('/detail/{id}', [PropertyController::class, 'show']);
 
@@ -87,6 +117,12 @@ Route::get('/detail/{id}', function ($id) {
     $property = \App\Models\Property::with('photos')->findOrFail($id);
     return view('detail', compact('property'));
 })->name('detail');
+
+Route::get('/seller/{id}', function ($id) {
+    $user = \App\Models\User::findOrFail($id);
+    return view('profile', compact('user'));
+})->name('seller.profile');
+
 
 
 Route::get('/house-survey/{id}', function ($id) {

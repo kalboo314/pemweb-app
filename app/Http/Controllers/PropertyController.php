@@ -6,6 +6,8 @@ use App\Models\Property;
 use App\Models\PropertyPhoto;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class PropertyController extends Controller
 {
@@ -25,17 +27,14 @@ class PropertyController extends Controller
                 'foto.*' => 'image|mimes:jpeg,png,jpg|max:2048',
             ]);
 
-            // simpan file sertifikat
             $sertifikat = $request->file('sertifikat');
             $sertifikatGenerated = $sertifikat->hashName();
             $sertifikat->storeAs('uploads', $sertifikatGenerated);
 
-
-
-            // hilangkan titik dari harga (contoh: 1.000.000 => 1000000)
             $harga = str_replace('.', '', $request->input('harga'));
 
             $property = Property::create([
+                'user_id' => Auth::id(), // ✔ Gunakan ini
                 'tipe_bangunan' => $request->tipe_bangunan,
                 'luas_bangunan' => $request->luas_bangunan,
                 'luas_tanah' => $request->luas_tanah,
@@ -62,14 +61,8 @@ class PropertyController extends Controller
         } catch (Exception $e) {
             dd('Error:', $e->getMessage());
         }
-        
-    }
-
-    public function index()
-    {
-        $properties = Property::latest()->paginate(9);
-        return view('listing', compact('properties'));
     }
 
 }
+
 

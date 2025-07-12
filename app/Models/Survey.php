@@ -6,7 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Survey extends Model
 {
-    protected $fillable = ['property_id', 'nama', 'alamat', 'catatan'];
+    protected $fillable = [
+    'property_id', 
+    'nama', 
+    'alamat', 
+    'phone', 
+    'tanggal', 
+    'catatan'
+    ];
+
 
     public function property()
     {

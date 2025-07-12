@@ -7,9 +7,9 @@
     <title>Contact Us</title>
     @vite('resources/css/app.css')
 </head>
-<body>
+<body class="flex flex-col min-h-screen">
     <x-navbar></x-navbar>
-    <section class="bg-gray-100 py-20 px-4">
+    <section class="bg-gray-100 py-20 px-4 flex-grow">
         <div class="max-w-3xl mx-auto text-center">
             <h2 class="text-2xl font-semibold mb-10">How Can We Help?</h2>
 
