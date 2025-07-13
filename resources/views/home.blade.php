@@ -31,7 +31,7 @@
     <x-navbar></x-navbar>
 
     <!-- Hero Section -->
-    <div class="h-screen bg-[url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80')] bg-no-repeat bg-center bg-cover flex flex-col justify-center items-center px-4 text-center relative">
+    <div class="h-screen bg-[url('https://cdn.discordapp.com/attachments/1157102092427735100/1393972079191265311/bg_image.png?ex=68751d2a&is=6873cbaa&hm=2ba1551a8a26f597abf237458668625392ba5ed324e71147b49e2bb86b662733&')] bg-no-repeat bg-center bg-cover flex flex-col justify-center items-center px-4 text-center relative">
         <!-- Overlay -->
         <div class="absolute inset-0 bg-black bg-opacity-40 z-10"></div>
 
