@@ -44,4 +44,12 @@ class ProfileController extends Controller
 
         return redirect()->route('profile')->with('success', 'Profil berhasil diperbarui.');
     }
+
+    public function show($id)
+    {
+        $user = User::findOrFail($id);
+        return view('profile-seller', compact('user'));
+    }
+
+
 }

@@ -42,7 +42,7 @@
             <p class="text-white text-lg md:text-xl mb-6">Temukan rumah impian anda</p>
 
             <!-- Search Bar -->
-            <div class="flex items-center bg-white rounded-full px-4 py-2 shadow-md w-full max-w-xl mx-auto">
+            {{-- <div class="flex items-center bg-white rounded-full px-4 py-2 shadow-md w-full max-w-xl mx-auto">
                 <input
                     type="text"
                     placeholder="Enter Name, Keywords..."
@@ -56,12 +56,11 @@
                             d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"></path>
                     </svg>
                 </button>
-            </div>
+            </div> --}}
 
 
             <!-- Category Icons -->
             <div class="flex gap-4 mt-8 flex-wrap justify-center">
-                <!-- Modern Villa (anggap ini Penthouse) -->
                 <a href="{{ url('/listing?tipe_bangunan=Town House') }}"
                 class="flex items-center gap-3 px-5 py-2 rounded-full backdrop-blur-sm bg-white/30 shadow-lg text-white cursor-pointer hover:bg-white/40 transition">
                     <div class="bg-white p-2 rounded-full shadow-md">
@@ -70,7 +69,6 @@
                     <span class="font-medium">Town House</span>
                 </a>
 
-                <!-- Apartment -->
                 <a href="{{ url('/listing?tipe_bangunan=Apartment') }}"
                 class="flex items-center gap-3 px-5 py-2 rounded-full backdrop-blur-sm bg-white/30 shadow-lg text-white cursor-pointer hover:bg-white/40 transition">
                     <div class="bg-white p-2 rounded-full shadow-md">
@@ -79,7 +77,6 @@
                     <span class="font-medium">Apartment</span>
                 </a>
 
-                <!-- Town House -->
                 <a href="{{ url('/listing?tipe_bangunan=Pent House') }}"
                 class="flex items-center gap-3 px-5 py-2 rounded-full backdrop-blur-sm bg-white/30 shadow-lg text-white cursor-pointer hover:bg-white/40 transition">
                     <div class="bg-white p-2 rounded-full shadow-md">
@@ -96,7 +93,7 @@
 
     <!-- Why You Should Work With Us Section -->
     <section class="py-20 bg-white text-center px-4">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4 pb-20">Why You Should Work With Us</h2>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 pb-20">Kenapa Anda Harus Memilih Kami</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
             <!-- Card 1 -->
@@ -190,63 +187,59 @@
         </div>
     </section>
 
+   <section class="bg-gray-50 py-20 px-4 md:px-10 text-center">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Find Properties in These Cities</h2>
+            <p class="text-gray-500 text-sm md:text-base mb-10">Temukan properti terbaik di berbagai kota di Indonesia.</p>
 
+            <div class="relative">
+                <div class="swiper citiesSwiper">
+                    <div class="swiper-wrapper">
+                        @php
+                            use App\Models\Property;
+                            $cities = ['Jakarta', 'Bandung', 'Bekasi', 'Denpasar', 'Yogyakarta', 'Surabaya', 'Bogor', 'Tangerang', 'Padang', 'Samarinda'];
+                        @endphp
 
-
-    <section class="bg-gray-50 py-20 px-4 md:px-10 text-center">
-    <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Find Properties in These Cities</h2>
-        <p class="text-gray-500 text-sm md:text-base mb-10">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-
-        <div class="relative">
-            <div class="swiper citiesSwiper">
-                <div class="swiper-wrapper">
-                    @php
-                    $cities = [
-                        ["name" => "JAKARTA", "properties" => 3, "image" => "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80"],
-                        ["name" => "BANDUNG", "properties" => 2, "image" => "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80"],
-                        ["name" => "BEKASI", "properties" => 2, "image" => "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80"],
-                        ["name" => "DENPASAR", "properties" => 3, "image" => "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80"],
-                        ["name" => "YOGYAKARTA", "properties" => 2, "image" => "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80"],
-                        ["name" => "BOGOR", "properties" => 1, "image" => "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80"],
-                        ["name" => "TANGERANG", "properties" => 2, "image" => "https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1740&q=80"],
-                    ];
-                    @endphp
-
-                    @foreach ($cities as $city)
-                    <div class="swiper-slide px-3">
-                        <div class="rounded-lg overflow-hidden relative group transition-all duration-300">
-                            <img src="{{ $city['image'] }}" alt="{{ $city['name'] }}" class="h-60 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent flex flex-col justify-end p-4 text-left text-white">
-                                <h3 class="font-bold text-base">{{ $city['name'] }}</h3>
-                                <p class="text-sm opacity-90">{{ $city['properties'] }} Properties</p>
+                        @foreach ($cities as $city)
+                            @php
+                                $properties = Property::with('photos')->where('lokasi', $city)->get();
+                                $firstPhoto = $properties->first()?->photos->first()?->generated_name ?? null;
+                                $photoUrl = $firstPhoto
+                                    ? asset('storage/uploads/' . $firstPhoto)
+                                    : 'https://sfcontent.reiwa.com.au/sfcontent/images/default-source/default/news/couple_house_sold_736x414-(1).tmb-imgwidgetm.jpeg?sfvrsn=51617653_1';
+                            @endphp
+                            <div class="swiper-slide px-3">
+                                <a href="{{ url('/listing?lokasi=' . $city) }}" class="block rounded-lg overflow-hidden relative group transition-all duration-300">
+                                    <img src="{{ $photoUrl }}" alt="{{ $city }}" class="h-60 w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/40 to-transparent flex flex-col justify-end p-4 text-left text-white">
+                                        <h3 class="font-bold text-base">{{ $city }}</h3>
+                                        <p class="text-sm opacity-90">{{ $properties->count() }} Properties</p>
+                                    </div>
+                                </a>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
-                    @endforeach
+
+                    <!-- Pagination -->
+                    <div class="swiper-pagination !bottom-0 mt-6 !relative"></div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="absolute inset-y-1/2 -translate-y-1/2 w-full flex justify-between px-2 md:px-4 z-10">
+                        <button class="swiper-button-prev-custom bg-black/50 hover:bg-black/70 text-white p-3 rounded-full shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button class="swiper-button-next-custom bg-black/50 hover:bg-black/70 text-white p-3 rounded-full shadow-md">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-
-                <!-- Pagination -->
-                <div class="swiper-pagination !bottom-0 mt-6 !relative"></div>
-
-                <!-- Navigation Buttons -->
-                <div class="absolute inset-y-1/2 -translate-y-1/2 w-full flex justify-between px-2 md:px-4 z-10">
-                    <button class="swiper-button-prev-custom bg-black/50 hover:bg-black/70 text-white p-3 rounded-full shadow-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button class="swiper-button-next-custom bg-black/50 hover:bg-black/70 text-white p-3 rounded-full shadow-md">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
-
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- How It Works Section -->
     <section class="py-20 bg-white px-4 md:px-10">
@@ -321,30 +314,28 @@
 @endsection
 
 @push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 <script>
-    const swiper = new Swiper('.citiesSwiper', {
-        slidesPerView: 1.2,
-        spaceBetween: 16,
-        breakpoints: {
-            640: {
-                slidesPerView: 2,
-            },
-            768: {
-                slidesPerView: 3,
-            },
-            1024: {
-                slidesPerView: 4,
-            },
-        },
-        loop: false,
-        pagination: {
-            el: ".swiper-pagination",
-            clickable: true,
-        },
-        navigation: {
-            nextEl: ".swiper-button-next-custom",
-            prevEl: ".swiper-button-prev-custom",
-        },
-    });
+  const citiesSwiper = new Swiper('.citiesSwiper', {
+    loop: true,
+    slidesPerView: 1,
+    spaceBetween: 20,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next-custom',
+      prevEl: '.swiper-button-prev-custom',
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: 2,
+      },
+      1024: {
+        slidesPerView: 3,
+      }
+    }
+  });
 </script>
 @endpush

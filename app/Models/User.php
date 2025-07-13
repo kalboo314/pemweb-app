@@ -32,4 +32,9 @@ class User extends Authenticatable
         return $this->hasMany(\App\Models\Property::class);
     }
 
+    public function isAdmin()
+    {
+        return $this->is_admin;
+    }
+
 }

@@ -10,7 +10,7 @@
 
     <div class="relative w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
         
-        <a href="#" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold">&times;</a>
+        <a href="{{ url('detail/' . $property->id) }}" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl font-bold">&times;</a>
 
         <h1 class="text-3xl font-bold text-center mb-6">House Survey</h1>
         

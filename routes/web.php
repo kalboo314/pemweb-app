@@ -2,13 +2,16 @@
 
 use App\Http\Controllers\PropertyController;
 use App\Http\Controllers\ContactController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\SurveyController;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Property;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AdminController;
+use Illuminate\Routing\Middleware\SubstituteBindings;
+use App\Http\Middleware\IsAdmin;
+use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
@@ -39,13 +42,16 @@ Route::get('/house-survey', function () {
     return view('house-survey');
 });
 
-
-
 Route::post('/login', function (Request $request) {
     $credentials = $request->only('email', 'password');
 
     if (Auth::attempt($credentials)) {
         $request->session()->regenerate();
+
+        if (Auth::user()->is_admin) {
+            return redirect()->route('admin.dashboard');
+        }
+
         return redirect()->intended('/');
     }
 
@@ -91,7 +97,7 @@ Route::post('/advertise', [PropertyController::class, 'store'])
 
 Route::get('/listing', function () {
     $properties = \App\Models\Property::with('photos')
-        ->when(request('lokasi'), fn($q) => $q->where('lokasi', request('lokasi')))
+        ->when(request('lokasi'), fn($q) => $q->whereRaw('LOWER(lokasi) = ?', [strtolower(request('lokasi'))]))
         ->when(request('tipe_bangunan'), fn($q) => $q->where('tipe_bangunan', request('tipe_bangunan')))
         ->when(request('harga'), function ($q) {
             $range = request('harga');
@@ -118,11 +124,7 @@ Route::get('/detail/{id}', function ($id) {
     return view('detail', compact('property'));
 })->name('detail');
 
-Route::get('/seller/{id}', function ($id) {
-    $user = \App\Models\User::findOrFail($id);
-    return view('profile', compact('user'));
-})->name('seller.profile');
-
+Route::get('/seller/{id}', [ProfileController::class, 'show'])->name('seller.profile');
 
 
 Route::get('/house-survey/{id}', function ($id) {
@@ -137,3 +139,30 @@ Route::post('/house-survey', [SurveyController::class, 'store'])->name('survey.s
 Route::get('/contact', [ContactController::class, 'show'])->name('contact');
 
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+
+Route::get('/admin/dashboard', function () {
+    $users = \App\Models\User::all();
+    $properties = \App\Models\Property::with('user')->get();
+    $surveys = \App\Models\Survey::with('property')->get();
+
+    return view('admin.dashboard', compact('users', 'properties', 'surveys'));
+})->middleware('auth')->name('admin.dashboard');
+
+Route::middleware('auth')->group(function () {
+    // Dashboard
+    Route::get('/admin', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+
+    // Users
+    Route::get('/admin/user/create', [AdminController::class, 'createUser'])->name('admin.user.create');
+    Route::post('/admin/user/store', [AdminController::class, 'storeUser'])->name('admin.user.store');
+    Route::delete('/admin/user/{id}', [AdminController::class, 'deleteUser'])->name('admin.user.delete');
+    Route::post('/admin/user/{id}/role', [AdminController::class, 'updateUserRole'])->name('admin.user.updateRole');
+
+    // Properties
+    Route::get('/admin/property/create', [AdminController::class, 'createProperty'])->name('admin.property.create'); // <-- INI
+    Route::post('/admin/property/store', [AdminController::class, 'storeProperty'])->name('admin.property.store');
+    Route::delete('/admin/property/{id}', [AdminController::class, 'deleteProperty'])->name('admin.property.delete');
+
+    // Surveys
+    Route::delete('/admin/survey/{id}', [AdminController::class, 'deleteSurvey'])->name('admin.survey.delete');
+});
