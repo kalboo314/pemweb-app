@@ -7,7 +7,8 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    <div class="max-w-4xl mx-auto p-6">
+    <x-navbar></x-navbar>
+    <div class="max-w-4xl mx-auto p-6 pt-25">
         <div class="flex items-center space-x-6 mb-6">
             <div class="relative">
                 {{-- Gambar Preview --}}
@@ -55,11 +56,18 @@
                     class="w-full border border-gray-300 p-2 rounded">
             </div>
 
-            <div class="text-right">
-                <button type="submit" class="bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-gray-700 transition">
+            <div class="flex justify-end space-x-4">
+                <button type="button" onclick="history.back()" 
+                    class="bg-gray-200 text-gray-700 px-5 py-2 rounded-full hover:bg-gray-300 transition">
+                    Batal
+                </button>
+
+                <button type="submit" 
+                    class="bg-gray-800 text-white px-5 py-2 rounded-full hover:bg-gray-700 transition">
                     Simpan
                 </button>
             </div>
+
         </form>
     </div>
 

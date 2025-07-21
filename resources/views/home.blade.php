@@ -41,22 +41,6 @@
             <h1 class="text-5xl md:text-6xl font-bold text-white mb-2">RUMAHIN</h1>
             <p class="text-white text-lg md:text-xl mb-6">Temukan rumah impian anda</p>
 
-            <!-- Search Bar -->
-            {{-- <div class="flex items-center bg-white rounded-full px-4 py-2 shadow-md w-full max-w-xl mx-auto">
-                <input
-                    type="text"
-                    placeholder="Enter Name, Keywords..."
-                    class="flex-grow outline-none px-4 py-2 text-gray-700">
-                <button
-                    class="text-white bg-yellow-400 hover:bg-yellow-500 rounded-full p-3 transition duration-300 shadow hover:shadow-lg focus:outline-none">
-                    <!-- SVG Icon -->
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21 21l-4.35-4.35M11 19a8 8 0 100-16 8 8 0 000 16z"></path>
-                    </svg>
-                </button>
-            </div> --}}
 
 
             <!-- Category Icons -->
@@ -187,6 +171,7 @@
         </div>
     </section>
 
+    <!-- Find Properties -->
    <section class="bg-gray-50 py-20 px-4 md:px-10 text-center">
         <div class="max-w-7xl mx-auto">
             <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">Find Properties in These Cities</h2>
