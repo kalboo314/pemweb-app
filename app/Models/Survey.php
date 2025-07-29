@@ -12,7 +12,8 @@ class Survey extends Model
     'alamat', 
     'phone', 
     'tanggal', 
-    'catatan'
+    'catatan',
+    'status'
     ];
 
 

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('phone'); // baru
             $table->date('tanggal'); // baru
             $table->text('catatan')->nullable();
+            $table->string('status')->default('menunggu');
             $table->timestamps();
         });
 

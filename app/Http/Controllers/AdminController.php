@@ -82,4 +82,18 @@ class AdminController extends Controller
         Survey::destroy($id);
         return back()->with('success', 'Survey dihapus');
     }
+
+   public function updateStatus($surveyId, $status)
+    {
+        $survey = Survey::findOrFail($surveyId);
+
+        if (!in_array($status, ['diterima', 'ditolak'])) {
+            return redirect()->back()->with('error', 'Status tidak valid.');
+        }
+
+        $survey->status = $status;
+        $survey->save();
+
+        return redirect()->back()->with('success', 'Status survey berhasil diperbarui.');
+    }
 }

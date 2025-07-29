@@ -166,3 +166,5 @@ Route::middleware('auth')->group(function () {
     // Surveys
     Route::delete('/admin/survey/{id}', [AdminController::class, 'deleteSurvey'])->name('admin.survey.delete');
 });
+
+Route::post('/admin/survey/{survey}/status/{status}', [AdminController::class, 'updateStatus'])->name('admin.survey.updateStatus');

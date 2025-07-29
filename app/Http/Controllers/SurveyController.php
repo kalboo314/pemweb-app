@@ -41,6 +41,4 @@ class SurveyController extends Controller
         ->route('detail', $request->property_id)
         ->with('survey_success', "Survey berhasil dijadwalkan pada tanggal " . date('d M Y', strtotime($tanggal)) . "!");
     }
-
-
 }
